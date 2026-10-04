@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -24,19 +23,24 @@ public class TextEditorApp implements ActionListener{
     }
 
     private void prepareGUI() {
-
+        mainFrame = new JFrame("Java Interaction Page");
+        mainFrame.setSize(WIDTH, HEIGHT);
     }
 
     private void showEventDemo() {
 
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
 
     }
 
     private class ButtonClickListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            String command = e.getActionCommand();
 
+        }
     }
 }
 
