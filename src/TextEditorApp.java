@@ -1,16 +1,17 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.Border;
 
 public class TextEditorApp implements ActionListener {
     private JFrame mainFrame;
     private JPanel controlPanel;
     public JTextArea ta;
     public JTextArea ta2;
-    private int WIDTH = 800;
-    private int HEIGHT = 700;
+    private int WIDTH = 1000;
+    private int HEIGHT = 800;
     public String currenttext;
+    public String capitalizedtext;
+    public String Loweredtext;
 
 
     public TextEditorApp() {
@@ -25,30 +26,19 @@ public class TextEditorApp implements ActionListener {
     private void prepareGUI() {
         mainFrame = new JFrame("Java Interaction Page");
         mainFrame.setSize(WIDTH, HEIGHT);
-        mainFrame.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-        c.insets = new Insets(2,2,2,2);
-        c.gridx = 0;
-        c.gridy = 0;
-        c.ipadx = 800;
-        c.ipady = 10;
+        mainFrame.setLayout(new BorderLayout());
+
         ta = new JTextArea();
-        mainFrame.add(ta, c);
+        mainFrame.add(ta, BorderLayout.NORTH);
 
-        c.gridx = 0;
-        c.gridy = 1;
-        c.ipadx = 10;
-        c.ipady = 10;
         controlPanel = new JPanel();
-        controlPanel.setLayout(new FlowLayout());
-        mainFrame.add(controlPanel,c);
+        controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
+        mainFrame.add(controlPanel, BorderLayout.CENTER);
 
-        c.gridx = 0;
-        c.gridy = 2;
-        c.ipadx = 800;
-        c.ipady = 100;
         ta2 = new JTextArea();
-        mainFrame.add(ta2,c);
+        ta2.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(ta2);
+        controlPanel.add(scrollPane);
 
         mainFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
@@ -62,15 +52,23 @@ public class TextEditorApp implements ActionListener {
     private void showEventDemo() {
         JButton submitButton = new JButton("Submit");
         JButton resetButton = new JButton("Reset");
+        JButton capitalizeButton = new JButton("Capitalize");
+        JButton lowercaseButton = new JButton("Lower Case");
 
         submitButton.setActionCommand("Submit");
         resetButton.setActionCommand("Reset");
+        capitalizeButton.setActionCommand("Capitalize");
+        lowercaseButton.setActionCommand("Lower Case");
 
         submitButton.addActionListener(new ButtonClickListener());
         resetButton.addActionListener(new ButtonClickListener());
+        capitalizeButton.addActionListener(new ButtonClickListener());
+        lowercaseButton.addActionListener(new ButtonClickListener());
 
         controlPanel.add(submitButton);
         controlPanel.add(resetButton);
+        controlPanel.add(capitalizeButton);
+        controlPanel.add(lowercaseButton);
 
         mainFrame.setVisible(true);
     }
@@ -98,9 +96,21 @@ public class TextEditorApp implements ActionListener {
             if (command.equals("Submit")) {
                 currenttext = ta.getText();
                 ta2.append("\n" + currenttext);
-            } else if (command.equals("Reset")) {
+            }
+            if (command.equals("Reset")) {
                 ta.setText("");
                 ta2.setText("");
+            }
+            if (command.equals("Capitalize")){
+                currenttext = ta.getText();
+                capitalizedtext = currenttext.toUpperCase();
+                ta2.append("\n" + capitalizedtext);
+            }
+            if (command.equals("Lower Case")) {
+                currenttext = ta.getText();
+                System.out.println("It works lol");
+                Loweredtext = currenttext.toLowerCase();
+                ta2.append("\n" + Loweredtext);
             }
         }
     }
