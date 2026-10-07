@@ -39,6 +39,7 @@ public class TextEditorApp implements ActionListener {
         ta2.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(ta2);
         controlPanel.add(scrollPane);
+        //found scrollPanel existed from online searching panel types
 
         mainFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
